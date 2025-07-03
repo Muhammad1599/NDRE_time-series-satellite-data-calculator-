@@ -43,11 +43,30 @@ Where:
 - NIR = Near-infrared reflectance (Sentinel-2 Band 8)
 - RedEdge = Red Edge reflectance (Sentinel-2 Band 5)
 
-NDRE values range from -1 to 1, where:
-- Higher values (>0.3) typically indicate healthy vegetation with good nitrogen content
-- Lower values (<0.2) may indicate nitrogen stress or unhealthy vegetation
-- Values near 0 often indicate bare soil
-- Negative values typically indicate water or shadows
+### Data Scaling and Interpretation
+
+#### Sentinel-2 Data Scaling
+- Raw Sentinel-2 bands are scaled from 0 to 10000
+- Bands are normalized to 0-1 scale by dividing by 10000 before NDRE calculation
+- This scaling ensures proper NDRE value ranges and comparability with scientific literature
+
+#### NDRE Value Ranges
+- Theoretical range: -1 to +1
+- Typical ranges for different vegetation conditions:
+  * > 0.4: Very healthy vegetation with high nitrogen content
+  * 0.3 - 0.4: Good vegetation health and nitrogen status
+  * 0.2 - 0.3: Moderate vegetation health
+  * 0.1 - 0.2: Poor vegetation health or possible nitrogen stress
+  * < 0.1: Severe stress or non-vegetated surfaces
+  * < 0: Water, shadows, or non-vegetated surfaces
+
+#### Interpretation Guidelines
+- Higher values indicate better plant health and nitrogen content
+- Values vary throughout the growing season
+- Consider growth stage when interpreting values
+- Local calibration may be needed for specific crops
+- Compare with historical data when possible
+- Account for environmental conditions
 
 ## Requirements
 

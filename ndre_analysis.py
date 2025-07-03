@@ -194,9 +194,9 @@ class NDREAnalyzer:
     def calculate_ndre(self, image):
         """Calculate NDRE for a single image"""
         try:
-            # Select bands
-            NIR = image.select('B8')    # NIR band
-            REDEDGE = image.select('B5') # Red Edge band
+            # Select bands and normalize to 0-1 scale (Sentinel-2 data is in 0-10000 scale)
+            NIR = image.select('B8').divide(10000)      # NIR band
+            REDEDGE = image.select('B5').divide(10000)  # Red Edge band
             
             # Calculate NDRE: (NIR - RedEdge)/(NIR + RedEdge)
             ndre = NIR.subtract(REDEDGE).divide(NIR.add(REDEDGE))
